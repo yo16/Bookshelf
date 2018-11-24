@@ -1,0 +1,52 @@
+/*
+BookShelf style sheet
+
+2018/11/11 y.ikeda
+*/
+
+/*
+白
+#EFF7FF
+黄色
+#E8DB7D
+緑
+#558C8C
+赤
+#82204A
+黒
+#231123
+
+*/
+
+/*
+共通部分
+*/
+body {
+    background-color: #EFF7FF;
+    font-family:"メイリオ","Hiragino Kaku Gothic Pro",Meiryo,"ヒラギノ角ゴ Pro W3","MS PGothic","MS UI Gothic",Helvetica,Arial,sans-serif;
+    color: #333;
+}
+
+.tblList {
+    background-color:#fff;
+}
+.tblList td {
+    border:solid 1px #558C8C;
+    padding: 5px;
+}
+.infoTitle {
+    background-color:#558C8C;
+    color:#fff;
+}
+
+
+/*
+一覧
+*/
+
+
+/*
+登録/編集
+*/
+
+

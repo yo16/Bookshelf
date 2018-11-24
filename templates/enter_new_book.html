@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>図書一覧</title>
+        <link rel="stylesheet" href="/static/css/books.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/js/enter_new_book.js"></script>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th><a href="./">[ 一覧 ]</a></th>
+                <td>&nbsp;|&nbsp;</td>
+                <th>[ 登録 ]</th>
+            </tr>
+        </table>
+        <br />
+        <form action="./regist" method="POST" id="frmRegist">
+        <table id="tblEnterBookInfos" class="tblList">
+            <tr>
+                <td class="infoTitle">ISBN</td>
+                <td>
+                    <input type="text" id="isbn" name="isbn" />
+                    <input type="button" id="btnSearchByISBN" value="本を検索" />
+                </td>
+            </tr>
+            <tr>
+                <td class="infoTitle">タイトル</td>
+                <td>
+                    <img id="img_thumbnail" />
+                    <input type="hidden" id="image_url" name="image_url" />
+                    <input type="text" id="title" name="title" size="50" />
+                </td>
+            </tr>
+            <tr>
+                <td class="infoTitle">著者</td>
+                <td>
+                    <input type="hidden" id="num_of_authors" name="num_of_authors" value="1" />
+                    <input type="text" id="authors0" name="author0" /><!-- input type="button" id="btnDelAuthor0" value="x" / --><br />
+                    <input type="button" id="btnAddAuthors" value="著者を追加" />
+                </td>
+            </tr>
+            <tr>
+                <td class="infoTitle">出版社</td>
+                <td><input type="text" id="publisher" name="publisher" /></td>
+            </tr>
+            <tr>
+                <td class="infoTitle">コメント</td>
+                <td><textarea id="comment" name="comment"></textarea></td>
+            </tr>
+            <tr>
+                <td class="infoTitle">タグ</td>
+                <td><input type="text" id="tags" name="tags" /></td>
+            </tr>
+        </table>
+        <input type="button" id="btnRegist" value="登録" />
+    </form>
+    <input type="button" value="Reset" onclick="initialize();" />
+    </body>
+</html>

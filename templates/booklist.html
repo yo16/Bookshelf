@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>図書一覧</title>
+        <link rel="stylesheet" href="/static/css/books.css">
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>[ 一覧 ]</th>
+                <td>&nbsp;|&nbsp;</td>
+                <th><a href="./enter_new_book">[ 登録 ]</a></th>
+            </tr>
+        </table>
+        <br />
+        <table id="tblBooksList" class="tblList">
+            <tr>
+                <td class="infoTitle">タイトル</td>
+                <td class="infoTitle">著者</td>
+                <td class="infoTitle">出版社</td>
+                <td class="infoTitle">ISBN</td>
+            </tr>
+            {% for b in books %}
+            <tr>
+                <td>{{ b.title }}</td>
+                <td>
+                    {% for a in b.authors %}
+                        {{ a }}<br />
+                    {% endfor %}
+                </td>
+                <td>{{ b.publisher }}</td>
+                <td>{{ b.isbn }}</td>
+            </tr>
+                <br />
+            {% endfor %}
+            </table>
+    </body>
+</html>
