@@ -7,6 +7,12 @@ This source is used in "enter_new_book.html".
 var GOOGLE_API_BOOK = "https://www.googleapis.com/books/v1/volumes?q=";
 
 $(document).ready(function(){
+    $("#isbn").keydown(function(e){
+        if(e.keyCode==13){
+            // enter
+            search_book_by_isbn($("#isbn").val());
+        }
+    });
     $("#btnSearchByISBN").click(function(){
         search_book_by_isbn($("#isbn").val());
     });
@@ -24,8 +30,8 @@ $(document).ready(function(){
     });
 
     initialize();
-    //$("#isbn").val("9784873117584");
-    //$("#isbn").val("9784584135570");
+    //$("#isbn").val("9784873117584");    // ゼロから作るDeep Learning
+    //$("#isbn").val("9784584135570");    // 体幹トレーニング
     //$("#isbn").val("9784788925458");    // 統計検定２級
 });
 
@@ -98,6 +104,12 @@ function initialize(){
         delAuthor(1);
     }
     $("#publisher").val("");
+    $("#publisher_code").val("");
+    $("#publisher_key_id").val("");
+    $("#img_thumbnail").attr("src","");
+    $("#image_url").val("");
+    $("#comment").val("");
+    $("#tags").val("");
 };
 
 /*
