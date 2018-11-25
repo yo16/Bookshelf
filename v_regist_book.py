@@ -19,7 +19,6 @@ def main():
         'tags': []
     }
     print('---------')
-    print(book_info)
     # authors0, authors1, authors2, ・・・
     num_of_authors = int(request.form['num_of_authors'])
     for i in range(num_of_authors):
@@ -42,6 +41,7 @@ def main():
         #print('t.id:', tag_key.integer_id())
         cur_id = tag_key.integer_id()
         book_info['tags'].append(cur_id)
+    print(book_info)
 
     # 問い合わせてなかったら登録
     b = Book.query(Book.isbn==book_info['isbn']).get()

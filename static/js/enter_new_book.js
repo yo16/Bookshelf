@@ -61,8 +61,10 @@ function search_book_by_isbn(isbn){
         }
         $("#publisher").val(js_data["publisher"]);
         //$("#isbn").val(js_data["isbn"]);
-        $("#img_thumbnail").attr("src", js_data["thumbnail"])
-        $("#img_url").val(js_data["image_url"])
+        $("#img_thumbnail").attr("src", js_data["image_url"])
+        $("#image_url").val(js_data["image_url"])
+        $("#comment").val(js_data["comment"])
+        $("#tags").val(js_data["tags"])
     })
     .fail((data)=>{
         console.log("Could not found book info by isbn["+isbn+"].");

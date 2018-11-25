@@ -12,23 +12,50 @@ from bookshelf_common import API_KEY, APP_DOMAIN
 from google.appengine.ext import ndb
 import json
 
-from models import Books, Book, Publisher
+from models import Books, Book, Publisher, Tag
 
 
 def main(request):
     isbn = request.json['isbn']
 
     ret_dic = {
-        'title': 'title-test',
-        'authors': ['a1', 'a2', 'a3'],
-        'isbn': '',
-        'thumbnail': ''
+        'title': '',
+        'authors': [],
+        'publisher': '',
+        'image_url': '',
+        'comment': '',
+        'tags': []
     }
-    # Googleから情報を取得（出版社以外）
-    ret_dic = get_by_GoogleApi(isbn)
 
-    # 出版社を取得
-    ret_dic['publisher'] = get_publisher(isbn)
+    # Datastoreを優先に探す
+    b = Book.query(Book.isbn==isbn).get()
+    if b is not None:
+        print('FOUND IN DATASTORE!!!')
+        # Datastoreに登録されている場合は、その値を表示
+        ret_dic['title'] = b.title
+        ret_dic['authors'] = []
+        for a in b.authors:
+            ret_dic['authors'].append(a)
+        ret_dic['publisher'] = b.publisher
+        ret_dic['image_url'] = b.image_url
+        ret_dic['comment'] = b.comment
+        tags_str = ''
+        i = 0
+        for t_id in b.tags:
+            if i>0:
+                tags_str += ', '
+            # Tagから文字列へ変換
+            t = ndb.Key(Tag, t_id).get()
+            tags_str += t.tag_name
+            i += 1
+        ret_dic['tags'] = tags_str
+    else:
+        print('NOT FOUND IN datastore....')
+        # Googleから情報を取得（出版社以外）
+        ret_dic = get_by_GoogleApi(isbn)
+
+        # 出版社を取得
+        ret_dic['publisher'] = get_publisher(isbn)
 
     return jsonify(ResultSet=json.dumps(ret_dic))
 
@@ -81,7 +108,7 @@ def get_by_GoogleApi(isbn):
     ret['title'] = item['volumeInfo']['title']
     for a in item['volumeInfo']['authors']:
         ret['authors'].append(a)
-    ret['thumbnail'] = item['volumeInfo']['imageLinks']['thumbnail']
+    ret['image_url'] = item['volumeInfo']['imageLinks']['thumbnail']
     ret['isbn'] = isbn
 
     return ret
