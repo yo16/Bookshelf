@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8"/>
         <title>図書一覧</title>
         <link rel="stylesheet" href="/static/css/books.css">
     </head>
@@ -18,18 +19,29 @@
                 <td class="infoTitle">タイトル</td>
                 <td class="infoTitle">著者</td>
                 <td class="infoTitle">出版社</td>
-                <td class="infoTitle">ISBN</td>
+                <!-- td class="infoTitle">ISBN</td -->
+                <td class="infoTitle">コメント</td>
+                <td class="infoTitle">タグ</td>
             </tr>
             {% for b in books %}
             <tr>
-                <td>{{ b.title }}</td>
+                <td>
+                    <img src="{{ b.image_url }}" />
+                    {{ b.title }}
+                </td>
                 <td>
                     {% for a in b.authors %}
                         {{ a }}<br />
                     {% endfor %}
                 </td>
                 <td>{{ b.publisher }}</td>
-                <td>{{ b.isbn }}</td>
+                <!-- td>{{ b.isbn }}</td -->
+                <td>{{ b.comment }}</td>
+                <td>
+                    {% for t in b.tags %}
+                        {{ t }}<br />
+                    {% endfor %}
+                </td>
             </tr>
                 <br />
             {% endfor %}

@@ -20,7 +20,8 @@ $(document).ready(function(){
     });
 
     initialize();
-    $("#isbn").val("9784873117584");
+    //$("#isbn").val("9784873117584");
+    $("#isbn").val("9784584135570")
 });
 
 /*
@@ -35,6 +36,7 @@ function search_book_by_isbn(isbn){
 
     // initialie
     initialize();
+    $("#isbn").val(isbn)
 
     // using Ajax
     $.ajax({
@@ -58,7 +60,7 @@ function search_book_by_isbn(isbn){
             }
         }
         $("#publisher").val(js_data["publisher"]);
-        $("#isbn").val(js_data["isbn"]);
+        //$("#isbn").val(js_data["isbn"]);
         $("#img_thumbnail").attr("src", js_data["thumbnail"])
         $("#img_url").val(js_data["image_url"])
     })

@@ -31,12 +31,16 @@ body {
     background-color:#fff;
 }
 .tblList td {
-    border:solid 1px #558C8C;
+    border: solid 1px #558C8C;
     padding: 5px;
 }
 .infoTitle {
-    background-color:#558C8C;
-    color:#fff;
+    background-color: #558C8C;
+    color: #fff;
+}
+.light_str {
+    color: #999;
+    font-size: 50%;
 }
 
 
