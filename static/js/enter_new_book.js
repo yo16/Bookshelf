@@ -11,6 +11,10 @@ $(document).ready(function(){
         search_book_by_isbn($("#isbn").val());
     });
 
+    $("#isbn").blur(function(){
+        setPublisherCode();
+    });
+
     $("#btnAddAuthors").click(function(){
         addAuthor();
     });
@@ -21,7 +25,8 @@ $(document).ready(function(){
 
     initialize();
     //$("#isbn").val("9784873117584");
-    $("#isbn").val("9784584135570")
+    //$("#isbn").val("9784584135570");
+    //$("#isbn").val("9784788925458");    // 統計検定２級
 });
 
 /*
@@ -59,12 +64,16 @@ function search_book_by_isbn(isbn){
                 $("#authors"+i).val(js_data["authors"][i]);
             }
         }
+        $("#publisher_code").val(js_data["publisher_code"]);
         $("#publisher").val(js_data["publisher"]);
+        $("#publisher_key_id").val(js_data["publisher_key_id"]);
         //$("#isbn").val(js_data["isbn"]);
-        $("#img_thumbnail").attr("src", js_data["image_url"])
-        $("#image_url").val(js_data["image_url"])
-        $("#comment").val(js_data["comment"])
-        $("#tags").val(js_data["tags"])
+        if (js_data["image_url"].length>0){
+            $("#img_thumbnail").attr("src", js_data["image_url"]);
+            $("#image_url").val(js_data["image_url"]);
+        }
+        $("#comment").val(js_data["comment"]);
+        $("#tags").val(js_data["tags"]);
     })
     .fail((data)=>{
         console.log("Could not found book info by isbn["+isbn+"].");
@@ -72,7 +81,7 @@ function search_book_by_isbn(isbn){
     })
     .always((data)=>{
 
-    })
+    });
 
     return ret;
 };
@@ -144,4 +153,29 @@ registBook
 */
 function registBook(){
     $("#frmRegist").submit();
+}
+
+/*
+setPublisherCode();
+*/
+function setPublisherCode(){
+    var str_isbn = $("#isbn").val();
+    if (str_isbn.length==13){
+        top2 = str_isbn.slice(4,6);
+        keta = 2;
+        if (top2 < 20){
+            keta = 2;
+        } else if (top2 < 70){
+            keta = 3;
+        } else if (top2 < 85){
+            keta = 4;
+        } else if (top2 < 90){
+            keta = 5;
+        } else if (top2 < 95){
+            keta = 6;
+        } else {
+            keta = 7;
+        }
+        $("#publisher_code").val(str_isbn.slice(4,4+keta));
+    }
 }

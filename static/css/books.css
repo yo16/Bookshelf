@@ -55,5 +55,11 @@ body {
 /*
 登録/編集
 */
-
+#comment {
+    width: 400px;
+    height: 50px;
+}
+#publisher_code {
+    width: 50px;
+}
 

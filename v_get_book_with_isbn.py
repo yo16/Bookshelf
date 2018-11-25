@@ -7,7 +7,7 @@ import urllib
 import urllib2
 from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup, BeautifulStoneSoup
-from bookshelf_common import API_KEY, APP_DOMAIN
+from bookshelf_common import APP_DOMAIN
 
 from google.appengine.ext import ndb
 import json
@@ -19,9 +19,11 @@ def main(request):
     isbn = request.json['isbn']
 
     ret_dic = {
+        'isbn': '',
         'title': '',
         'authors': [],
         'publisher': '',
+        'publisher_code': '',
         'image_url': '',
         'comment': '',
         'tags': []
@@ -30,13 +32,20 @@ def main(request):
     # Datastoreを優先に探す
     b = Book.query(Book.isbn==isbn).get()
     if b is not None:
-        print('FOUND IN DATASTORE!!!')
         # Datastoreに登録されている場合は、その値を表示
+        ret_dic['isbn'] = isbn
         ret_dic['title'] = b.title
         ret_dic['authors'] = []
         for a in b.authors:
             ret_dic['authors'].append(a)
-        ret_dic['publisher'] = b.publisher
+        p_key = ndb.Key(Publisher, b.publisher_key_id)
+        if p_key is None:
+            ret_dic['publisher'] = '[code]' + slice_publisher_code(isbn)
+        else:
+            p = p_key.get()
+            ret_dic['publisher'] = p.pub_name
+        ret_dic['publisher_code'] = slice_publisher_code(isbn)
+        ret_dic['publisher_key_id'] = b.publisher_key_id
         ret_dic['image_url'] = b.image_url
         ret_dic['comment'] = b.comment
         tags_str = ''
@@ -50,12 +59,15 @@ def main(request):
             i += 1
         ret_dic['tags'] = tags_str
     else:
-        print('NOT FOUND IN datastore....')
+        # Datastoreに登録されていない場合は、
         # Googleから情報を取得（出版社以外）
         ret_dic = get_by_GoogleApi(isbn)
 
         # 出版社を取得
-        ret_dic['publisher'] = get_publisher(isbn)
+        publisher, publisher_key_id = get_publisher(isbn)
+        ret_dic['publisher'] = publisher
+        ret_dic['publisher_code'] = slice_publisher_code(isbn)
+        ret_dic['publisher_key_id'] = publisher_key_id
 
     return jsonify(ResultSet=json.dumps(ret_dic))
 
@@ -71,7 +83,8 @@ def get_by_GoogleApi(isbn):
     }
 
     #url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + '&key=' + API_KEY
-    url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + '&country=JP&key=' + API_KEY
+    #url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + '&country=JP&key=' + API_KEY
+    url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + '&country=JP'
     #https://www.googleapis.com/books/v1/volumes?q=isbn:9784873117584&key=AIzaSyAt1d-a2u44JOMOj5iYI3LzpwISkasj0is
     print 'URL:', url
     headers = {
@@ -109,38 +122,31 @@ def get_by_GoogleApi(isbn):
     ret['title'] = item['volumeInfo']['title']
     for a in item['volumeInfo']['authors']:
         ret['authors'].append(a)
-    ret['image_url'] = item['volumeInfo']['imageLinks']['thumbnail']
+    thumbnail = item['volumeInfo']['imageLinks']['thumbnail']
+    ret['image_url'] = 'https' + thumbnail[len('http'):]
     ret['isbn'] = isbn
 
     return ret
 
 
 def get_publisher(isbn):
-    """ 出版者を取得する
+    """ 出版者とIDを取得する
     """
-    ret = ''
-
     # Datastoreから、出版社を取得
-    datastore_publisher = get_publisher_from_datastore(isbn)
+    publisher_name, publisher_key_id = get_publisher_from_datastore(isbn)
 
     # Datastoreで見つからなかった場合は、ISBN公式サイトから取得
-    if datastore_publisher is None:
-        print '*****1'
+    if publisher_name is None:
         # ISBNサイトから、出版社を取得
-        #isbn_publisher = get_publisher_from_isbn(isbn)        # 未実装のためコメントアウト
-        isbn_publisher = '[code]' + slice_publisher_code(isbn)  # ダミーコード
-
-        if isbn_publisher is not None:
-            ret = isbn_publisher
-            # 次回のためにDatastoreへ保存しておく
-            put_publisher_into_datastore(slice_publisher_code(isbn), isbn_publisher)
-        else:
-            ret = '[code]' + slice_publisher_code(isbn)
-    else:
-        ret = datastore_publisher
-        print '*****2'
+        #publisher_name = get_publisher_from_isbn(isbn)        # 未実装のためコメントアウト
+        publisher_name = '[code]' + slice_publisher_code(isbn)  # ダミーコード
+        if publisher_name is None:
+            # 見つからない場合は、定形文を書いておく
+            publisher_name = '[code]' + slice_publisher_code(isbn)
+        # 次回のためにDatastoreへ保存しておく
+        publisher_key_id = put_publisher_into_datastore(slice_publisher_code(isbn), publisher_name)
     
-    return ret
+    return publisher_name, publisher_key_id
 
 
 def get_publisher_from_datastore(isbn):
@@ -149,11 +155,13 @@ def get_publisher_from_datastore(isbn):
     isbn_pub = slice_publisher_code(isbn)
 
     pub_name = None
+    pub_id = None
     q = Publisher.query(Publisher.pub_code == isbn_pub).get()
     if q is not None:
         pub_name = q.pub_name
-    
-    return pub_name
+        pub_id = q.key.integer_id()
+
+    return pub_name, pub_id
 
 
 def get_publisher_from_isbn(isbn):
@@ -207,7 +215,8 @@ def put_publisher_into_datastore(code, name):
         'pub_code': code,
         'pub_name': name
     }
-    Publisher(**isbn_info).put()
+    pub_key = Publisher(**isbn_info).put()
+    return pub_key.integer_id()
 
 
 def slice_publisher_code(isbn):

@@ -13,7 +13,7 @@ def main():
         'isbn': request.form['isbn'],
         'title': request.form['title'],
         'authors': [],
-        'publisher': request.form['publisher'],
+        'publisher_key_id': request.form['publisher_key_id'],
         'image_url': request.form['image_url'],
         'comment': request.form['comment'],
         'tags': []
@@ -23,10 +23,17 @@ def main():
     num_of_authors = int(request.form['num_of_authors'])
     for i in range(num_of_authors):
         book_info['authors'].append(request.form['author'+str(i)])
+    # publisher_key_id
+    if len(book_info['publisher_key_id'])==0:
+        book_info['publisher_key_id'] = None
+    else:
+        book_info['publisher_key_id'] = int(book_info['publisher_key_id'])
     # tags
     tags_entered = request.form['tags'].split(',')
     for tag in tags_entered:
         reg_tag = {'tag_name': tag.strip()}
+        if len(reg_tag)==0:
+            continue
         # Tagを問い合わせて、無かったら登録
         t = Tag.query(Tag.tag_name==reg_tag['tag_name']).get()
         tag_key = None
@@ -54,7 +61,7 @@ def main():
         b.authors = []
         for a in book_info['authors']:
             b.authors.append(a)
-        b.publisher = book_info['publisher']
+        b.publisher_key_id = book_info['publisher_key_id']
         b.image_url = book_info['image_url']
         b.comment = book_info['comment']
         b.tags = []

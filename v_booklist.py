@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ booklist
 List all books
 
@@ -6,7 +7,7 @@ List all books
 
 from flask import Flask, render_template, request
 
-from models import Books, Book, Tag
+from models import Books, Book, Tag, Publisher
 from google.appengine.ext import ndb
 
 
@@ -27,7 +28,7 @@ def main():
         cur_book['authors'] = []
         for a in b.authors:
             cur_book['authors'].append(a)
-        cur_book['publisher'] = b.publisher
+        cur_book['publisher'] = get_publisher(b.publisher_key_id)
         cur_book['isbn'] = b.isbn
         cur_book['image_url'] = b.image_url
         cur_book['comment'] = b.comment
@@ -49,3 +50,12 @@ def get_books():
     blist = bs.get_books()
     return blist
 
+def get_publisher(id):
+    """publisher_key_idからpublisherを取得
+    """
+    p_key = ndb.Key(Publisher, id)
+    if p_key is None:
+        return ""
+    
+    publisher = p_key.get()
+    return publisher.pub_name
