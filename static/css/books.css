@@ -47,7 +47,10 @@ body {
 /*
 一覧
 */
-
+#img_book {
+    width: 64px;
+    height: 91px;
+}
 
 /*
 登録/編集

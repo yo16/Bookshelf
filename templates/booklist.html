@@ -28,7 +28,7 @@
             {% for b in books %}
             <tr>
                 <td>
-                    <img src="{{ b.image_url }}" />
+                    <img id="img_book" src="{{ b.image_url }}" />
                     {{ b.title }}
                 </td>
                 <td>
@@ -45,8 +45,7 @@
                     {% endfor %}
                 </td>
             </tr>
-                <br />
             {% endfor %}
-            </table>
+        </table>
     </body>
 </html>

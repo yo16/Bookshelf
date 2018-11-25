@@ -70,7 +70,8 @@ def get_by_GoogleApi(isbn):
         'thumbnail': ''
     }
 
-    url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + '&key=' + API_KEY
+    #url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + '&key=' + API_KEY
+    url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + '&country=JP&key=' + API_KEY
     #https://www.googleapis.com/books/v1/volumes?q=isbn:9784873117584&key=AIzaSyAt1d-a2u44JOMOj5iYI3LzpwISkasj0is
     print 'URL:', url
     headers = {
