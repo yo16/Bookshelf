@@ -4,7 +4,6 @@ This source is used in "enter_new_book.html".
 
 2018/11/11 y.ikeda
 */
-var GOOGLE_API_BOOK = "https://www.googleapis.com/books/v1/volumes?q=";
 
 $(document).ready(function(){
     $("#isbn").keydown(function(e){
