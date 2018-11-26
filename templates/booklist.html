@@ -29,7 +29,7 @@
             <tr>
                 <td>
                     <img id="img_book" src="{{ b.image_url }}" />
-                    {{ b.title }}
+                    <a href="./enter_new_book?isbn={{ b.isbn }}">{{ b.title }}</a>
                 </td>
                 <td>
                     {% for a in b.authors %}

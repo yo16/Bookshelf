@@ -23,7 +23,7 @@ def index():
     """Return Books list."""
     return v_booklist.main()
 
-@app.route('/enter_new_book')
+@app.route('/enter_new_book', methods=['GET'])
 def regist():
     """Enter new book info."""
     return v_enter_new_book.main()
