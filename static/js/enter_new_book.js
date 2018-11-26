@@ -73,6 +73,7 @@ function search_book_by_isbn(isbn){
         $("#publisher").val(js_data["publisher"]);
         $("#publisher_key_id").val(js_data["publisher_key_id"]);
         //$("#isbn").val(js_data["isbn"]);
+        $("#isbn").val(isbn);
         if (js_data["image_url"].length>0){
             $("#img_thumbnail").attr("src", js_data["image_url"]);
             $("#image_url").val(js_data["image_url"]);

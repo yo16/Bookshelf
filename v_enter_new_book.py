@@ -9,4 +9,10 @@ from models import Books, Book
 from google.appengine.ext import ndb
 
 def main():
-    return render_template('enter_new_book.html')
+    isbn=''
+    if 'isbn' in request.args:
+        isbn = request.args.get('isbn')
+    return render_template(
+        'enter_new_book.html',
+        isbn=isbn
+    )

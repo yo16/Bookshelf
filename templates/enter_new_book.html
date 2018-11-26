@@ -14,7 +14,13 @@
             <tr>
                 <th><a href="./">[ 一覧 ]</a></th>
                 <td>&nbsp;|&nbsp;</td>
+                {% if isbn=="" %}
                 <th>[ 登録 ]</th>
+                {% else %}
+                <th><a href="./enter_new_book">[ 登録 ]</a></th>
+                {% endif %}
+                <td>&nbsp;|&nbsp;</td>
+                <th>[ 編集 ]</th>
             </tr>
         </table>
         <br />
@@ -23,7 +29,7 @@
             <tr>
                 <td class="infoTitle">ISBN</td>
                 <td>
-                    <input type="text" id="isbn" name="isbn" />
+                    <input type="text" id="isbn" name="isbn" value="{{ isbn }}"/>
                     <input type="button" id="btnSearchByISBN" value="本を検索" />
                 </td>
             </tr>
@@ -63,5 +69,10 @@
         <input type="button" id="btnRegist" value="登録" />
         <input type="button" value="リセット" onclick="initialize();" />
     </form>
+    {% if isbn!="" %}
+    <script language="JavaScript">
+    search_book_by_isbn($("#isbn").val());
+    </script>
+    {% endif %}
     </body>
 </html>
