@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>図書一覧</title>
         <link rel="shortcut icon" href="/static/img/favicon.ico" />
         <link rel="stylesheet" href="/static/css/books.css">
@@ -28,21 +29,27 @@
         <table id="tblEnterBookInfos" class="tblList">
             <tr>
                 <td class="infoTitle">ISBN</td>
+            </tr>
+            <tr>
                 <td>
-                    <input type="text" id="isbn" name="isbn" value="{{ isbn }}"/>
+                    <input type="tel" id="isbn" name="isbn" value="{{ isbn }}"/>
                     <input type="button" id="btnSearchByISBN" value="本を検索" />
                 </td>
             </tr>
             <tr>
                 <td class="infoTitle">タイトル</td>
+            </tr>
+            <tr>
                 <td>
                     <img id="img_thumbnail" />
                     <input type="hidden" id="image_url" name="image_url" />
-                    <input type="text" id="title" name="title" size="50" />
+                    <input type="text" id="title" name="title" />
                 </td>
             </tr>
             <tr>
                 <td class="infoTitle">著者</td>
+            </tr>
+            <tr>
                 <td>
                     <input type="hidden" id="num_of_authors" name="num_of_authors" value="1" />
                     <input type="text" id="authors0" name="author0" /><!-- input type="button" id="btnDelAuthor0" value="x" / --><br />
@@ -51,6 +58,8 @@
             </tr>
             <tr>
                 <td class="infoTitle">出版社</td>
+            </tr>
+            <tr>
                 <td>
                     <input type="text" id="publisher_code" name="publisher_code" readonly />
                     <input type="text" id="publisher" name="publisher" readonly />
@@ -59,10 +68,14 @@
             </tr>
             <tr>
                 <td class="infoTitle">コメント</td>
+            </tr>
+            <tr>
                 <td><textarea id="comment" name="comment"></textarea></td>
             </tr>
             <tr>
                 <td class="infoTitle">タグ</td>
+            </tr>
+            <tr>
                 <td><input type="text" id="tags" name="tags" /><span class="light_str">(カンマ区切り)</span></td>
             </tr>
         </table>
