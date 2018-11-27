@@ -30,6 +30,8 @@ def main():
             cur_book['authors'].append(a)
         cur_book['publisher'] = get_publisher(b.publisher_key_id)
         cur_book['isbn'] = b.isbn
+        if (b.image_url is None) or (len(b.image_url)==0):
+            b.image_url = '/static/img/NoImage.png'
         cur_book['image_url'] = b.image_url
         cur_book['comment'] = b.comment
         cur_book['tags'] = []

@@ -68,6 +68,9 @@ def main(request):
         ret_dic['publisher'] = publisher
         ret_dic['publisher_code'] = slice_publisher_code(isbn)
         ret_dic['publisher_key_id'] = publisher_key_id
+    
+    if (ret_dic['image_url'] is None) or (len(ret_dic['image_url'])==0):
+        ret_dic['image_url'] = '/static/img/NoImage.png'
 
     return jsonify(ResultSet=json.dumps(ret_dic))
 

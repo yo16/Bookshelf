@@ -48,6 +48,9 @@ def main():
         #print('t.id:', tag_key.integer_id())
         cur_id = tag_key.integer_id()
         book_info['tags'].append(cur_id)
+    # image_url
+    if (book_info['image_url'] is None) or (len(book_info['image_url'])==0):
+        book_info['image_url'] = '/static/img/NoImage.png'
     print(book_info)
 
     # 問い合わせてなかったら登録
