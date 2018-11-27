@@ -32,7 +32,7 @@ def main():
     tags_entered = request.form['tags'].split(',')
     for tag in tags_entered:
         reg_tag = {'tag_name': tag.strip()}
-        if len(reg_tag)==0:
+        if len(reg_tag['tag_name'])==0:
             continue
         # Tagを問い合わせて、無かったら登録
         t = Tag.query(Tag.tag_name==reg_tag['tag_name']).get()
