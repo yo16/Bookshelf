@@ -79,7 +79,8 @@ def get_by_GoogleApi(isbn):
         'title': '',
         'authors': [],
         'isbn': '',
-        'thumbnail': ''
+        'thumbnail': '',
+        'image_url': ''
     }
 
     #url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + '&key=' + API_KEY
@@ -120,10 +121,12 @@ def get_by_GoogleApi(isbn):
     # Googleから取得した情報を設定
     item = jdata['items'][0]
     ret['title'] = item['volumeInfo']['title']
-    for a in item['volumeInfo']['authors']:
-        ret['authors'].append(a)
-    thumbnail = item['volumeInfo']['imageLinks']['thumbnail']
-    ret['image_url'] = 'https' + thumbnail[len('http'):]
+    if 'authors' in item['volumeInfo']:
+        for a in item['volumeInfo']['authors']:
+            ret['authors'].append(a)
+    if 'imageLinks' in item['volumeInfo']:
+        thumbnail = item['volumeInfo']['imageLinks']['thumbnail']
+        ret['image_url'] = 'https' + thumbnail[len('http'):]
     ret['isbn'] = isbn
 
     return ret

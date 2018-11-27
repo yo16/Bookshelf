@@ -84,6 +84,9 @@ function search_book_by_isbn(isbn){
     .fail((data)=>{
         console.log("Could not found book info by isbn["+isbn+"].");
         console.log(data);
+
+        initialize();
+        $("#isbn").val(isbn);
     })
     .always((data)=>{
 
