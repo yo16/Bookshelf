@@ -62,6 +62,10 @@ input[type="button"]:active {/*ボタンを押したとき*/
     color: #999;
     font-size: 50%;
 }
+.warning_message {
+    color: #f00;
+    font-weight: bold;
+}
 
 
 /*
