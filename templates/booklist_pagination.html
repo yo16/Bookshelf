@@ -1,0 +1,50 @@
+{#
+    booklist.html内で使用するページネーション
+ #}
+ {% set PAGE_WINDOW_SIZE = 1 %}
+
+{# --- １つ前 --- #}
+{% if page.prev >= 0 %}
+<a href="/?page={{ page.prev }}">＜＜</a>
+{% else %}
+＜＜
+{% endif %}
+
+{# --- 直接遷移 --- #}
+{#
+    カレントページの前後 PAGE_WINDOW_SIZEページ だけ、直接リンクを作る。
+    それより外は、「・・・」にする。
+    #}
+{% if 0 < page.cur - PAGE_WINDOW_SIZE %}
+<a href="/">&nbsp;1&nbsp;</a>
+{% if 0 < page.cur - PAGE_WINDOW_SIZE - 1 %}
+&hellip;
+{% endif %}
+{% endif %}
+{% for i in range(PAGE_WINDOW_SIZE) %}
+    {% if 0 <= page.cur - (PAGE_WINDOW_SIZE-i) %}
+        {% set target_page = page.cur - (PAGE_WINDOW_SIZE-i) %}{# 0 order #}
+        <a href="/?page={{ target_page }}">&nbsp;{{ target_page+1 }}&nbsp;</a>
+    {% endif %}
+{% endfor %}
+&nbsp;{{ page.cur+1 }}&nbsp;
+{% for i in range(PAGE_WINDOW_SIZE) %}
+    {% if page.cur + i + 1 <= page.last %}
+        {% set target_page = page.cur + i + 1 %}{# 0 order #}
+        <a href="/?page={{ target_page }}">&nbsp;{{ target_page+1 }}&nbsp;</a>
+    {% endif %}
+{% endfor %}
+{% if page.cur + PAGE_WINDOW_SIZE < page.last %}
+{% if page.cur + PAGE_WINDOW_SIZE + 1 < page.last %}
+&hellip;
+{% endif %}
+<a href="/?page={{ page.last }}">&nbsp;{{ page.last+1 }}&nbsp;</a>
+{% endif %}
+{# --- １つ後 --- #}
+{% if 0 < page.next %}
+<a href="/?page={{ page.next }}">
+    ＞＞
+</a>
+{% else %}
+＞＞
+{% endif %}

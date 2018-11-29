@@ -18,7 +18,13 @@
                 <th>[ 編集 ]</th>
             </tr>
         </table>
-        <br />
+        <table id="tblPageHeader" class="tblPage">
+            <tr>
+                <td>
+                    {% include "booklist_pagination.html" %}
+                </td>
+            </tr>
+        </table>
         <table id="tblBooksList" class="tblList">
             <tr>
                 <td class="infoTitle">タイトル</td>
@@ -49,6 +55,13 @@
                 </td>
             </tr>
             {% endfor %}
+        </table>
+        <table id="tblPageFooter" class="tblPage">
+            <tr>
+                <td>
+                    {% include "booklist_pagination.html" %}
+                </td>
+            </tr>
         </table>
     </body>
 </html>

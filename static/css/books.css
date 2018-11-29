@@ -75,6 +75,13 @@ input[type="button"]:active {/*ボタンを押したとき*/
     width: 64px;
     height: 91px;
 }
+.tblPage {
+    width: 100%;
+    font-size: 0.8rem;
+}
+.tblPage td {
+    text-align: right;
+}
 
 /*
 登録/編集
