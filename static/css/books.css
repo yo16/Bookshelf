@@ -48,6 +48,7 @@ input[type="button"]:active {/*ボタンを押したとき*/
 }
 input[type="text"], input[type="tel"], textarea {
     border-radius: 3px;
+    height: 30px;
 }
 
 .tblList {
@@ -62,7 +63,7 @@ input[type="text"], input[type="tel"], textarea {
     color: #fff;
 }
 .light_str {
-    color: #999;
+    color: #ccc;
     font-size: 50%;
 }
 .warning_message {
@@ -94,7 +95,6 @@ input[type="text"], input[type="tel"], textarea {
 #txtSearch {
     padding-left: 30px;
     width: 200px;
-    height: 30px;
 }
 #frmSearch{
     position: relative;
@@ -122,5 +122,8 @@ input[type="text"], input[type="tel"], textarea {
 }
 #publisher_code {
     width: 50px;
+}
+#publisher, #tags, .authors_n{
+    width: 300px;
 }
 

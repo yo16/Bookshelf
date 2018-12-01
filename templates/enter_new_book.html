@@ -42,7 +42,9 @@
             </tr>
             <tr>
                 <td>
-                    <img id="img_thumbnail" />
+                    <span id="spnImageThumbnail" style="display:None" >
+                        <img id="img_thumbnail" /><br />
+                    </span>
                     <input type="hidden" id="image_url" name="image_url" />
                     <input type="text" id="title" name="title" />
                 </td>
@@ -53,7 +55,7 @@
             <tr>
                 <td>
                     <input type="hidden" id="num_of_authors" name="num_of_authors" value="1" />
-                    <input type="text" id="authors0" name="author0" /><!-- input type="button" id="btnDelAuthor0" value="x" / --><br />
+                    <input type="text" id="authors0" name="author0" class="authors_n" /><!-- input type="button" id="btnDelAuthor0" value="x" / --><br />
                     <input type="button" id="btnAddAuthors" value="著者を追加" />
                 </td>
             </tr>
@@ -62,7 +64,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="publisher_code" name="publisher_code" readonly />
+                    <input type="hidden" id="publisher_code" name="publisher_code" readonly />
                     <input type="text" id="publisher" name="publisher" readonly />
                     <input type="hidden" id="publisher_key_id" name="publisher_key_id" />
                 </td>
@@ -74,10 +76,10 @@
                 <td><textarea id="comment" name="comment"></textarea></td>
             </tr>
             <tr>
-                <td class="infoTitle">タグ</td>
+                <td class="infoTitle">タグ<span class="light_str">(カンマ区切り)</span></td>
             </tr>
             <tr>
-                <td><input type="text" id="tags" name="tags" /><span class="light_str">(カンマ区切り)</span></td>
+                <td><input type="text" id="tags" name="tags" /></td>
             </tr>
         </table>
         <input type="button" id="btnRegist" value="登録" />

@@ -98,7 +98,8 @@ function search_book_by_isbn(isbn){
         //$("#isbn").val(js_data["isbn"]);
         $("#isbn").val(isbn);
         if (js_data["image_url"].length>0){
-            $("#img_thumbnail").attr("src", js_data["image_url"]);
+            $("#img_thumbnail").attr("src", js_data["image_url"])
+            $("#spnImageThumbnail").css("display", "");
             $("#image_url").val(js_data["image_url"]);
         }
         $("#comment").val(js_data["comment"]);
@@ -132,7 +133,8 @@ function initialize(){
     $("#publisher").val("");
     $("#publisher_code").val("");
     $("#publisher_key_id").val("");
-    $("#img_thumbnail").attr("src","");
+    $("#img_thumbnail").attr("src","")
+    $("#spnImageThumbnail").css("display", "None");
     $("#image_url").val("");
     $("#comment").val("");
     $("#tags").val("");
@@ -151,6 +153,7 @@ function addAuthor(author){
             .attr("type", "text")
             .attr("id", "author"+(next_num-1))
             .attr("name", "author"+(next_num-1))
+            .addClass("authors_n")
             .val(author)
     );
     $("#btnAddAuthors").before(
