@@ -9,7 +9,7 @@ from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup, BeautifulStoneSoup
 from bookshelf_common import APP_DOMAIN
 
-from google.appengine.ext import ndb
+#from google.appengine.ext import ndb
 import json
 
 from models import Books, Book, Publisher, Tag
@@ -30,7 +30,7 @@ def main(request):
     }
 
     # Datastoreを優先に探す
-    b = Book.query(Book.isbn==isbn).get()
+    b = Book.get_book_by_isbn(isbn)
     if b is not None:
         # Datastoreに登録されている場合は、その値を表示
         ret_dic['isbn'] = isbn
@@ -38,11 +38,11 @@ def main(request):
         ret_dic['authors'] = []
         for a in b.authors:
             ret_dic['authors'].append(a)
-        p_key = ndb.Key(Publisher, b.publisher_key_id)
-        if p_key is None:
+        #p_key = ndb.Key(Publisher, b.publisher_key_id)
+        p = Publisher.get_publisher_by_id(b.publisher_key_id)
+        if p is None:
             ret_dic['publisher'] = '[code]' + slice_publisher_code(isbn)
         else:
-            p = p_key.get()
             ret_dic['publisher'] = p.pub_name
         ret_dic['publisher_code'] = slice_publisher_code(isbn)
         ret_dic['publisher_key_id'] = b.publisher_key_id
@@ -54,7 +54,7 @@ def main(request):
             if i>0:
                 tags_str += ', '
             # Tagから文字列へ変換
-            t = ndb.Key(Tag, t_id).get()
+            t = Tag.get_tag_by_id(t_id)
             tags_str += t.tag_name
             i += 1
         ret_dic['tags'] = tags_str
