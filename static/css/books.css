@@ -46,6 +46,9 @@ input[type="button"]:active {/*ボタンを押したとき*/
     transform: translateY(4px);/*下に動く*/
     border-bottom: none;/*線を消す*/
 }
+input[type="text"], input[type="tel"], textarea {
+    border-radius: 3px;
+}
 
 .tblList {
     background-color:#fff;
@@ -66,12 +69,18 @@ input[type="button"]:active {/*ボタンを押したとき*/
     color: #f00;
     font-weight: bold;
 }
+.align_left {
+    text-align: left;
+}
+.align_right {
+    text-align: right;
+}
 
 
 /*
 一覧
 */
-#img_book {
+#imgBook {
     width: 64px;
     height: 91px;
 }
@@ -79,8 +88,26 @@ input[type="button"]:active {/*ボタンを押したとき*/
     width: 100%;
     font-size: 0.8rem;
 }
-.tblPage td {
-    text-align: right;
+#tblPageHeader {
+    margin-top: 15px;
+}
+#txtSearch {
+    padding-left: 30px;
+    width: 200px;
+    height: 30px;
+}
+#frmSearch{
+    position: relative;
+}
+#txtSearch::placeholder {
+    color: #ccc;
+}
+#svgGlass {
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    fill: currentColor;
+    color: #ccc;
 }
 
 /*
