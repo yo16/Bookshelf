@@ -5,7 +5,7 @@ Regist new book.
 
 from flask import Flask, render_template, request
 
-from models import Book, Tag
+from models import Book
 import v_booklist
 
 def main():

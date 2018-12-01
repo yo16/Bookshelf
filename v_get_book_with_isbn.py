@@ -12,7 +12,7 @@ from bookshelf_common import APP_DOMAIN
 #from google.appengine.ext import ndb
 import json
 
-from models import Books, Book, Publisher, Tag
+from models import Book, Publisher, Tag
 
 
 def main(request):

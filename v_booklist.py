@@ -7,7 +7,7 @@ List all books
 
 from flask import Flask, render_template, request
 
-from models import Books, Tag, Publisher
+from models import Books
 #from google.appengine.ext import ndb
 
 # １ページの表示件数
