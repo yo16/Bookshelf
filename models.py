@@ -122,7 +122,7 @@ class Book(ndb.Model):
             # 登録
             Book(**book_info).put()
         else:
-        # あったら更新
+            # あったら更新
             b.title = book_info['title']
             b.authors = []
             for a in book_info['authors']:
