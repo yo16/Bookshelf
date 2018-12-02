@@ -7,8 +7,7 @@ List all books
 
 from flask import Flask, render_template, request
 
-from models import Books
-#from google.appengine.ext import ndb
+from models import get_books
 
 # １ページの表示件数
 NUM_OF_LIST = 10
@@ -26,7 +25,7 @@ def main():
     search_str = ''
     if 'searchStr' in request.args:
         search_str = request.args.get('searchStr')
-    bs, cur_page, last_page = Books.get_books(
+    bs, cur_page, last_page = get_books(
         search_str=search_str,
         page=cur_page,
         num_per_page=NUM_OF_LIST

@@ -9,10 +9,10 @@ from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup, BeautifulStoneSoup
 from bookshelf_common import APP_DOMAIN
 
-#from google.appengine.ext import ndb
 import json
 
-from models import Book, Publisher, Tag
+#from models import Book, Publisher, Tag
+from models import get_book_by_isbn, get_publisher_by_id, get_publisher_by_pub_code, get_tag_by_id
 
 
 def main(request):
@@ -30,7 +30,7 @@ def main(request):
     }
 
     # Datastoreを優先に探す
-    b = Book.get_book_by_isbn(isbn)
+    b = get_book_by_isbn(isbn)
     if b is not None:
         # Datastoreに登録されている場合は、その値を表示
         ret_dic['isbn'] = isbn
@@ -39,7 +39,7 @@ def main(request):
         for a in b.authors:
             ret_dic['authors'].append(a)
         #p_key = ndb.Key(Publisher, b.publisher_key_id)
-        p = Publisher.get_publisher_by_id(b.publisher_key_id)
+        p = get_publisher_by_id(b.publisher_key_id)
         if p is None:
             ret_dic['publisher'] = '[code]' + slice_publisher_code(isbn)
         else:
@@ -54,8 +54,8 @@ def main(request):
             if i>0:
                 tags_str += ', '
             # Tagから文字列へ変換
-            t = Tag.get_tag_by_id(t_id)
-            tags_str += t.tag_name
+            t = get_tag_by_id(t_id)
+            tags_str += t['tag_name']
             i += 1
         ret_dic['tags'] = tags_str
     else:
@@ -162,10 +162,10 @@ def get_publisher_from_datastore(isbn):
 
     pub_name = None
     pub_id = None
-    q = Publisher.query(Publisher.pub_code == isbn_pub).get()
+    q = get_publisher_by_pub_code(isbn_pub)
     if q is not None:
-        pub_name = q.pub_name
-        pub_id = q.key.integer_id()
+        pub_name = q['pub_name']
+        pub_id = q['key_id']
 
     return pub_name, pub_id
 
@@ -221,8 +221,7 @@ def put_publisher_into_datastore(code, name):
         'pub_code': code,
         'pub_name': name
     }
-    pub_key = Publisher(**isbn_info).put()
-    return pub_key.integer_id()
+    return regist_publisher(isbn_info)
 
 
 def slice_publisher_code(isbn):

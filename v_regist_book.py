@@ -5,7 +5,7 @@ Regist new book.
 
 from flask import Flask, render_template, request
 
-from models import Book
+from models import regist_book
 import v_booklist
 
 def main():
@@ -41,7 +41,7 @@ def main():
     print(book_info)
 
     # 登録
-    Book.regist_book(book_info)
+    regist_book(book_info)
 
     return v_booklist.main()
 
