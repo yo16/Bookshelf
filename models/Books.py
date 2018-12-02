@@ -3,12 +3,12 @@
 from .Book import get_books_by_str
 
 
-def get_books(search_str='', page=0, num_per_page=20):
+def get_books(search_strs=[], page=0, num_per_page=20):
     """ get_books
     search_strをキーに検索した結果の本dictionaryのリストを返す
     
     Args:
-        search_str (str): 検索キーワード。
+        search_strs (list(str)): 検索キーワードの配列。
         page (int): ページ番号。0から始まる整数。
         num_per_page (int): １ページあたりの件数。
     
@@ -19,7 +19,7 @@ def get_books(search_str='', page=0, num_per_page=20):
         (int): 最終ページ番号。
     """
     # DBから検索
-    bs_db = get_books_by_str(search_str)
+    bs_db = get_books_by_str(search_strs)
     
     # 指示されたページの要素番号を計算する
     cur_page = page

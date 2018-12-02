@@ -30,8 +30,7 @@ def get_books_by_str(search_str=''):
     bs_db = None
     if 0<len(search_str):
         # 検索文字列がある場合は検索
-        q = Book.query()   # under construction!
-        bs_db = q.fetch()   # under construction!
+        bs_db = search_books(search_str)
     else:
         # ない場合は、全体検索
         q = Book.query()
@@ -114,3 +113,59 @@ def get_book_by_isbn(isbn):
         return None
     return b_key.get()
 
+
+def search_books(search_strs=[]):
+    """ search_books
+    タイトル、コメント、著者、タグを検索する
+    
+    Args:
+        search_strs (list(str)): 検索する文字列の配列。
+    
+    Returns:
+        (list): Bookインスタンスの配列
+    """
+    # とりあえず無条件で検索
+    q = Book.query()
+    bs_db = q.fetch()
+
+    # １つずつ見て、条件に合うものを探す
+    ret_bs = []
+    for b in bs_db:
+        found = False
+        if is_match(b, search_strs):
+            ret_bs.append(b)
+    
+    return ret_bs
+
+
+def is_match(b, list_s):
+    """ is_match
+    Bookが検索条件にあうかどうかを判断する
+
+    Args:
+        b (Book): 調査対象のBookインスタンス
+        list_s (list(str)): 検索文字列のリスト
+
+    Returns:
+        True: マッチ
+        False: アンマッチ
+    """
+    # list_sのどれか１つでもマッチしたらTrue（or検索）
+    for s in list_s:
+        # タイトルまたはコメント
+        if (s in b.title) or (s in b.comment):
+            return True
+    
+        # 著者
+        for a in b.authors:
+            if s in a:
+                return True
+    
+        # タグ
+        for t in b.tags:
+            tag_info = get_tag_by_id(t)
+            if s in tag_info['tag_name']:
+                return True
+
+    return False
+        

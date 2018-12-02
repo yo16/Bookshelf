@@ -6,6 +6,7 @@ List all books
 """
 
 from flask import Flask, render_template, request
+import re
 
 from models import get_books
 
@@ -22,11 +23,15 @@ def main():
             cur_page = int(str_param_page)
 
     # DBから情報を取得
-    search_str = ''
+    search_strs = []
+    input_search_str = ''
     if 'searchStr' in request.args:
-        search_str = request.args.get('searchStr')
+        input_search_str = request.args.get('searchStr')
+        strs = re.split('\s+', input_search_str)
+        for s in strs:
+            search_strs.append(s.strip())
     bs, cur_page, last_page = get_books(
-        search_str=search_str,
+        search_strs=search_strs,
         page=cur_page,
         num_per_page=NUM_OF_LIST
     )
@@ -51,6 +56,7 @@ def main():
     return render_template(
         'booklist.html',
         books=bs,
-        page=page_info
+        page=page_info,
+        search_str=input_search_str
     )
 
