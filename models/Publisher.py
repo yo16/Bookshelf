@@ -19,13 +19,19 @@ def get_publisher_by_id(key_id):
         key_id (str): Publisherのkey_id
     
     Returns:
-        (str): 出版者名
+        (dict): 出版者情報
     """
     p_key = ndb.Key(Publisher, key_id)
     if p_key is None:
         return None
-    
-    return p_key.get()
+    p = p_key.get()
+
+    pub_info = {
+        'key_id': p.key.integer_id(),
+        'pub_name': p.pub_name,
+        'pub_code': p.pub_code
+    }
+    return pub_info
 
 
 def get_publisher_by_pub_code(publisher_code):

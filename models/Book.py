@@ -45,7 +45,7 @@ def get_books_by_str(search_str=''):
         for a in b.authors:
             cur_book['authors'].append(a)
         pub = get_publisher_by_id(b.publisher_key_id)
-        cur_book['publisher'] = pub.pub_name
+        cur_book['publisher'] = pub['pub_name']
         cur_book['isbn'] = b.isbn
         if (b.image_url is None) or (len(b.image_url)==0):
             b.image_url = '/static/img/NoImage.png'

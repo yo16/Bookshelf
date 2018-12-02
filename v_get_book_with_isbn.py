@@ -43,7 +43,7 @@ def main(request):
         if p is None:
             ret_dic['publisher'] = '[code]' + slice_publisher_code(isbn)
         else:
-            ret_dic['publisher'] = p.pub_name
+            ret_dic['publisher'] = p['pub_name']
         ret_dic['publisher_code'] = slice_publisher_code(isbn)
         ret_dic['publisher_key_id'] = b.publisher_key_id
         ret_dic['image_url'] = b.image_url
