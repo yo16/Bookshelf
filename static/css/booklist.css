@@ -1,0 +1,34 @@
+/*
+booklist.css
+
+一覧
+*/
+
+#imgBook {
+    width: 64px;
+    height: 91px;
+}
+.tblPage {
+    width: 100%;
+    font-size: 0.8rem;
+}
+#tblPageHeader {
+    margin-top: 15px;
+}
+#txtSearch {
+    padding-left: 30px;
+    width: 200px;
+}
+#frmSearch{
+    position: relative;
+}
+#txtSearch::placeholder {
+    color: #ccc;
+}
+#svgGlass {
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    fill: currentColor;
+    color: #ccc;
+}
