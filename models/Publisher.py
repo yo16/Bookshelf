@@ -42,7 +42,7 @@ def get_publisher_by_pub_code(publisher_code):
         publisher_code (str): 出版者コード
     
     Returns:
-        (Publisher):　Publisherオブジェクト
+        (dict):　出版者情報
     """
     pub_info = None
 
