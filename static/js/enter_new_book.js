@@ -193,6 +193,20 @@ function delAuthor(i){
 registBook
 */
 function registBook(){
+    // 入力チェック
+    var str_isbn = $("#isbn").val();
+    if ((str_isbn.length!=10) & (str_isbn.length!=13)){
+        alert("ISBNコードが不正です。");
+        $("#isbn")[0].focus();
+        return;
+    }
+    var str_title = $("#title").val();
+    if (str_title.length==0){
+        alert('タイトルが入力されていません。');
+        $("#title")[0].focus();
+        return;
+    }
+
     $("#frmRegist").submit();
 }
 
