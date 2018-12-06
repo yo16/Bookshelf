@@ -1,0 +1,17 @@
+Click==7.0
+Flask==1.0.2
+Jinja2==2.10
+MarkupSafe==1.0
+Werkzeug==0.14.1
+beautifulsoup4==4.6.3
+certifi==2018.10.15
+chardet==3.0.4
+html5lib==1.0.1
+idna==2.7
+itsdangerous==1.1.0
+lxml==4.2.5
+pathlib==1.0.1
+requests==2.20.1
+six==1.11.0
+urllib3==1.24.1
+webencodings==0.5.1
