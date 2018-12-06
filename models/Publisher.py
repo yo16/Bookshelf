@@ -73,3 +73,26 @@ def regist_publisher(publisher_info):
     pub_key = Publisher(**publisher_info).put()
     return pub_key.integer_id()
 
+
+def get_publishers():
+    """ get_publishers
+    登録されている出版者情報を返す
+
+    Args:
+        None
+    
+    Returns:
+        (list(dict)): 出版者情報
+    """
+    q = Publisher.query()
+    pub_db = q.fetch()
+
+    ret_pubs = []
+    for p in pub_db:
+        cur_pub = {}
+        cur_pub['pub_name'] = p.pub_name
+        cur_pub['pub_code'] = p.pub_code
+
+        ret_pubs.append(cur_pub)
+    
+    return ret_pubs
