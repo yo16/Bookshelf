@@ -53,3 +53,24 @@ def get_tag_by_id(key_id):
     }
     
     return tag_info
+
+
+def get_tags():
+    """ get_tags
+    Tagの情報を返す
+
+    Returns:
+        (list(dict)): タグ情報
+    """
+    t = Tag.query()
+    tag_db = t.fetch()
+
+    ret_tags = []
+    for t in tag_db:
+        cur_tag = {}
+        cur_tag['tag_name'] = t.tag_name
+
+        ret_tags.append(cur_tag)
+    
+    return ret_tags
+    

@@ -16,6 +16,8 @@ import v_booklist
 import v_enter_new_book
 import v_get_book_with_isbn
 import v_regist_book
+import v_maintenance
+import v_csv_output
 
 
 @app.route('/')
@@ -42,6 +44,15 @@ def regist_book():
     """Regist book"""
     return v_regist_book.main()
 
+@app.route('/maintenance')
+def maintenance():
+    """Maintenance"""
+    return v_maintenance.main()
+
+@app.route('/output_csv')
+def output_csv():
+    """Output CSV"""
+    return v_csv_output.main()
 
 
 @app.errorhandler(404)

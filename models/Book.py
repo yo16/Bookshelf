@@ -26,6 +26,9 @@ def get_books_by_str(search_str=''):
     Args:
         search_str (str): 検索する文字列。
                           ''の場合は、条件なし
+    
+    Returns:
+        (list(dict(Book like))): 辞書の配列
     """
     bs_db = None
     if 0<len(search_str):
