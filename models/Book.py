@@ -3,7 +3,8 @@
 from google.appengine.ext import ndb
 
 from .Tag import regist_tag, get_tag_by_id
-from .Publisher import get_publisher_by_id
+from .Publisher import get_publisher_by_id, slice_publisher_code, \
+                       get_publisher_by_pub_code, regist_publisher
 
 
 class Book(ndb.Model):
@@ -79,12 +80,34 @@ def regist_book(book_info):
     if 'tag_names' in book_info:
         for tag_name in book_info['tag_names']:
             # 登録 or 更新
+            print('tag:', tag_name)
             cur_key_id = regist_tag(tag_name)
             book_info['tags'].append(cur_key_id)
 
         # tag_namesは、キーごと削除
         del book_info['tag_names']
 
+    # publisher_key_idがない場合は、isbnからpublisher_codeを得て、publisher_key_idを作る
+    if 'publisher_key_id' not in book_info:
+        # key_idがない場合は、isbnから作り出す
+        # pub_codeとかpub_nameとかは使わない
+        pub_code = slice_publisher_code(book_info['isbn'])
+        p = get_publisher_by_pub_code(pub_code)
+        if p is None:
+            # 見つからなかったら新規登録
+            dict_pub = {
+                'pub_code': pub_code,
+                'pub_name': '[code]' + pub_code
+            }
+            book_info['publisher_key_id'] = regist_publisher(dict_pub)
+        else:
+            # 見つかった場合はそのまま登録
+            book_info['publisher_key_id'] = p['key_id']
+    
+    # publisherがあったら消しておく
+    if 'publisher' in book_info:
+        del book_info['publisher']
+    
     # Bookにisbnをキーに問い合わせて、無かったら登録
     b = Book.query(Book.isbn==book_info['isbn']).get()
     if b is None:
@@ -96,7 +119,31 @@ def regist_book(book_info):
         b.authors = []
         for a in book_info['authors']:
             b.authors.append(a)
-        b.publisher_key_id = book_info['publisher_key_id']
+        """
+        # publisher_key_idがない場合は、isbnからpublisher_codeを得る
+        if 'publisher_key_id' in book_info:
+            print('aaaaa')
+            b.publisher_key_id = book_info['publisher_key_id']
+        else:
+            print('bbbbb')
+            # key_idがない場合は、isbnから作り出す
+            # pub_codeとかpub_nameとかは使わない
+            pub_code = slice_publisher_code(book_info['isbn'])
+            p = get_publisher_by_pub_code(pub_code)
+            if p is None:
+                print('cccccc')
+                # 見つからなかったら新規登録
+                dict_pub = {
+                    'pub_code': pub_code,
+                    'pub_name': '[code]' + pub_code
+                }
+                b.publisher_key_id = regist_publisher(dict_pub)
+            else:
+                print('ddddd')
+                # 見つかった場合はそのまま登録
+                b.publisher_key_id = p['key_id']
+        """
+
         b.image_url = book_info['image_url']
         b.comment = book_info['comment']
         b.tags = []

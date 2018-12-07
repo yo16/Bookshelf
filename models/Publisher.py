@@ -96,3 +96,23 @@ def get_publishers():
         ret_pubs.append(cur_pub)
     
     return ret_pubs
+
+
+def slice_publisher_code(isbn):
+    """ 出版社コードを抜き出して返す
+    """
+    top2 = int(isbn[4:6])
+    keta = 2
+    if top2 < 20:
+        keta = 2
+    elif top2 < 70:
+        keta = 3
+    elif top2 < 85:
+        keta = 4
+    elif top2 < 90:
+        keta = 5
+    elif top2 < 95:
+        keta = 6
+    else:
+        keta = 7
+    return isbn[4:4+keta]

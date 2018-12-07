@@ -4,3 +4,12 @@ maintenance.css
 メンテ
 */
 
+code {
+    font-size: 0.8rem;
+    padding: 2px 4px;
+    color: #d14;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    white-space: nowrap;
+    border-radius: 3px;
+}

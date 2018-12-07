@@ -17,6 +17,16 @@
         <form name="frmOutputCsv" id="frmOutputCsv" action="./output_csv">
             <input type="button" id="btnOutputCsv" value="CSV出力" />
         </form>
+        <br />
         <h3>CSV入力</h3>
+        形式: <code>"title","publisher","authors","comment","tags","isbn","image_url"</code><br />
+        １行目はヘッダ
+        <form
+            name="frmInputCsv" id="frmInputCsv"
+            action="./input_csv" method="POST" enctype="multipart/form-data"
+        >
+            <input type="file" id="fileCsv" name="csv_file" />
+            <input type="button" id="btnInputCsv" value="CSV入力" />
+        </form>
     </body>
 </html>

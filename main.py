@@ -18,6 +18,7 @@ import v_get_book_with_isbn
 import v_regist_book
 import v_maintenance
 import v_csv_output
+import v_csv_input
 
 
 @app.route('/')
@@ -53,6 +54,11 @@ def maintenance():
 def output_csv():
     """Output CSV"""
     return v_csv_output.main()
+
+@app.route('/input_csv', methods=['POST'])
+def input_csv():
+    """Input CSV"""
+    return v_csv_input.main()
 
 
 @app.errorhandler(404)

@@ -12,7 +12,8 @@ from bookshelf_common import APP_DOMAIN
 import json
 
 #from models import Book, Publisher, Tag
-from models import get_book_by_isbn, get_publisher_by_id, get_publisher_by_pub_code, get_tag_by_id
+from models import get_book_by_isbn, get_publisher_by_id, \
+                   get_publisher_by_pub_code, get_tag_by_id, slice_publisher_code
 
 
 def main(request):
@@ -223,22 +224,3 @@ def put_publisher_into_datastore(code, name):
     }
     return regist_publisher(isbn_info)
 
-
-def slice_publisher_code(isbn):
-    """ 出版社コードを抜き出して返す
-    """
-    top2 = int(isbn[4:6])
-    keta = 2
-    if top2 < 20:
-        keta = 2
-    elif top2 < 70:
-        keta = 3
-    elif top2 < 85:
-        keta = 4
-    elif top2 < 90:
-        keta = 5
-    elif top2 < 95:
-        keta = 6
-    else:
-        keta = 7
-    return isbn[4:4+keta]
