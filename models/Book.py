@@ -190,7 +190,8 @@ def search_books(search_strs=[]):
 
 def is_match(b, list_s):
     """ is_match
-    Bookが検索条件にあうかどうかを判断する
+    Bookが検索条件にあうかどうかを判断する。
+    大文字小文字を区別せず検索するために、全て小文字に変換して検索する。
 
     Args:
         b (Book): 調査対象のBookインスタンス
@@ -202,19 +203,25 @@ def is_match(b, list_s):
     """
     # list_sのどれか１つでもマッチしたらTrue（or検索）
     for s in list_s:
+        s_l = s.lower()
+        
         # タイトルまたはコメント
-        if (s in b.title) or (s in b.comment):
+        title_l = b.title.lower()
+        comment_l = b.comment.lower()
+        if (s_l in title_l) or (s_l in comment_l):
             return True
     
         # 著者
         for a in b.authors:
-            if s in a:
+            a_l = a.lower()
+            if s_l in a_l:
                 return True
     
         # タグ
         for t in b.tags:
             tag_info = get_tag_by_id(t)
-            if s in tag_info['tag_name']:
+            tag_name_l = tag_info['tag_name'].lower()
+            if s_l in tag_name_l:
                 return True
 
     return False
