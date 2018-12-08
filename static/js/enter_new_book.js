@@ -73,6 +73,8 @@ function search_book_by_isbn(isbn){
         return;
     }
 
+    dispLoading("処理中...");
+
     // initialie
     initialize();
     $("#isbn").val(isbn)
@@ -119,7 +121,7 @@ function search_book_by_isbn(isbn){
         $("#isbn").val(isbn);
     })
     .always((data)=>{
-
+        removeLoading();
     });
 
     return ret;
@@ -310,4 +312,30 @@ function removeBook(){
     // 削除処理
     $("#hdnDelete").val("1");
     $("#frmRegist").submit();
+}
+
+// 参考
+// https://webllica.com/jquery-now-loading/
+/* ------------------------------
+ Loading イメージ表示関数
+ 引数： msg 画面に表示する文言
+ ------------------------------ */
+ function dispLoading(msg){
+    // 引数なし（メッセージなし）を許容
+    if( msg == undefined ){
+        msg = "";
+    }
+    // 画面表示メッセージ
+    var dispMsg = "<div class='loadingMsg'>" + msg + "</div>";
+    // ローディング画像が表示されていない場合のみ出力
+    if($("#loading").length == 0){
+        $("body").append("<div id='loading'>" + dispMsg + "</div>");
+    }
+}
+   
+/* ------------------------------
+Loading イメージ削除関数
+------------------------------ */
+function removeLoading(){
+    $("#loading").remove();
 }
