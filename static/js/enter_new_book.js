@@ -33,6 +33,12 @@ $(document).ready(function(){
     $("#btnRegist").click(function(){
         registBook();
     });
+    $("#btnReset").click(function(){
+        initialize();
+    });
+    $("#btnDelete").click(function(){
+        removeBook();
+    });
 
     initialize();
     //$("#isbn").val("9784873117584");    // ゼロから作るDeep Learning
@@ -288,4 +294,20 @@ function validate_isbn_code(isbn){
     }
 
     return true;
+}
+
+/*
+ removeThisBook()
+ */
+function removeBook(){
+    // 確認
+    var res = confirm("この本の情報を削除してもいいですか？\n["+$("#title").val()+"]");
+    if (!res){
+        console.log("rejected.")
+        return;
+    }
+
+    // 削除処理
+    $("#hdnDelete").val("1");
+    $("#frmRegist").submit();
 }

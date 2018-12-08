@@ -16,4 +16,8 @@ edit_new_book.css
 #publisher, #tags, .authors_n{
     width: 300px;
 }
+#btnDelete {
+    background: rgb(235, 102, 102);
+    border-color: #8b7366;
+}
 

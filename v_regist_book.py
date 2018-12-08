@@ -5,10 +5,26 @@ Regist new book.
 
 from flask import Flask, render_template, request
 
-from models import regist_book
+from models import regist_book, delete_book
 import v_booklist
 
 def main():
+    # 削除かどうかをフラグを見て確認する
+    del_flag = int(request.form['delete'])
+    if del_flag==1:
+        # 削除の場合は削除処理をする
+        delete_this_book()
+    else:
+        # 削除でない場合は、登録or更新
+        regist_or_update_this_book()
+
+    return v_booklist.main()
+
+
+def regist_or_update_this_book():
+    """ regist_book
+    登録または更新
+    """
     # Book登録用のdictionaryを作る
     book_info = {
         'isbn': request.form['isbn'],
@@ -43,5 +59,16 @@ def main():
     # 登録
     regist_book(book_info)
 
-    return v_booklist.main()
+    return None
 
+
+def delete_this_book():
+    """ delete_book
+    """
+    # 削除対象のISBN
+    isbn = request.form['isbn']
+    print('DETELTE %s' % isbn)
+
+    delete_book(isbn)
+
+    return None

@@ -85,7 +85,15 @@
             </tr>
         </table>
         <input type="button" id="btnRegist" value="登録" />
-        <input type="button" value="リセット" onclick="initialize();" />
+        <input type="button" value="リセット" id="btnReset" />
+        {% if isbn != "" %}
+            {# 編集
+                編集の場合は、削除用の項目を作り出す。
+             #}
+             <br /><br />
+            <input type="button" id="btnDelete" value="削除" />
+            <input type="hidden" id="hdnDelete" name="delete" value="0" />{# デフォルトは0(消さない) #}
+        {% endif %}
     </form>
     <br />
     <br />

@@ -225,4 +225,17 @@ def is_match(b, list_s):
                 return True
 
     return False
-        
+
+
+def delete_book(isbn):
+    """ delete_book
+    isbnをキーにBookを削除する。
+
+    Args:
+        isbn (str): 削除する本のISBN
+    """
+    b = get_book_by_isbn(isbn)
+    if b is not None:
+        b.key.delete()
+
+    return None
