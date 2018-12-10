@@ -153,7 +153,7 @@ def regist_book(book_info):
         
         # 更新したキー
         b_key = b.key
-    
+
     return b_key.integer_id()
 
 

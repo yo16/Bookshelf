@@ -94,14 +94,14 @@
             <input type="button" id="btnDelete" value="削除" />
             <input type="hidden" id="hdnDelete" name="delete" value="0" />{# デフォルトは0(消さない) #}
         {% endif %}
-    </form>
-    <br />
-    <br />
-    <br />
-    {% if isbn!="" %}
-    <script language="JavaScript">
-    search_book_by_isbn($("#isbn").val());
-    </script>
-    {% endif %}
+        </form>
+        <br />
+        <br />
+        <br />
+        {% if isbn!="" %}
+        <script language="JavaScript">
+        search_book_by_isbn($("#isbn").val());
+        </script>
+        {% endif %}
     </body>
 </html>

@@ -153,7 +153,7 @@ def get_publisher(isbn):
             publisher_name = '[code]' + slice_publisher_code(isbn)
         # 次回のためにDatastoreへ保存しておく
         publisher_key_id = put_publisher_into_datastore(slice_publisher_code(isbn), publisher_name)
-    
+        
     return publisher_name, publisher_key_id
 
 
