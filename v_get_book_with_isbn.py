@@ -13,7 +13,8 @@ import json
 
 #from models import Book, Publisher, Tag
 from models import get_book_by_isbn, get_publisher_by_id, \
-                   get_publisher_by_pub_code, get_tag_by_id, slice_publisher_code
+                   get_publisher_by_pub_code, get_tag_by_id, slice_publisher_code, \
+                   regist_publisher
 
 
 def main(request):
