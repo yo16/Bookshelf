@@ -73,7 +73,7 @@ function search_book_by_isbn(isbn){
         return;
     }
 
-    dispLoading("処理中...");
+    dispLoading("検索中...");
 
     // initialie
     initialize();
