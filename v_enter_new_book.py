@@ -11,6 +11,6 @@ def main():
     if 'isbn' in request.args:
         isbn = request.args.get('isbn')
     return render_template(
-        'enter_new_book.html',
+        'enterNewBook.html',
         isbn=isbn
     )

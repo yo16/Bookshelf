@@ -1,6 +1,6 @@
-/* enter_new_book.js
+/* enterNewBook.js
 
-This source is used in "enter_new_book.html".
+This source is used in "enterNewBook.html".
 
 2018/11/11 y.ikeda
 */
@@ -81,7 +81,7 @@ function search_book_by_isbn(isbn){
 
     // using Ajax
     $.ajax({
-        url: "./get_book_with_isbn",
+        url: "./getBookWithIsbn",
         type: "POST",
         dataType: 'json',
         contentType: 'application/json',

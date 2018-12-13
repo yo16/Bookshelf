@@ -26,12 +26,12 @@ def index():
     """Return Books list."""
     return v_booklist.main()
 
-@app.route('/enter_new_book', methods=['GET'])
+@app.route('/enterNewBook', methods=['GET'])
 def regist():
     """Enter new book info."""
     return v_enter_new_book.main()
 
-@app.route('/get_book_with_isbn', methods=['POST'])
+@app.route('/getBookWithIsbn', methods=['POST'])
 def get_book_with_isbn():
     """Get book info"""
     if request.headers['Content-Type'] != 'application/json':
@@ -50,12 +50,12 @@ def maintenance():
     """Maintenance"""
     return v_maintenance.main()
 
-@app.route('/output_csv')
+@app.route('/outputCsv')
 def output_csv():
     """Output CSV"""
     return v_csv_output.main()
 
-@app.route('/input_csv', methods=['POST'])
+@app.route('/inputCsv', methods=['POST'])
 def input_csv():
     """Input CSV"""
     return v_csv_input.main()

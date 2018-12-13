@@ -14,7 +14,7 @@
     <body>
         <h1>Maintenance</h1>
         <h3>CSV出力</h3>
-        <form name="frmOutputCsv" id="frmOutputCsv" action="./output_csv">
+        <form name="frmOutputCsv" id="frmOutputCsv" action="./outputCsv">
             <input type="button" id="btnOutputCsv" value="CSV出力" />
         </form>
         <br />
@@ -23,7 +23,7 @@
         １行目はヘッダ
         <form
             name="frmInputCsv" id="frmInputCsv"
-            action="./input_csv" method="POST" enctype="multipart/form-data"
+            action="./inputCsv" method="POST" enctype="multipart/form-data"
         >
             <input type="file" id="fileCsv" name="csv_file" />
             <input type="button" id="btnInputCsv" value="CSV入力" />

@@ -14,7 +14,7 @@
             <tr>
                 <th><a href="./">[ 一覧 ]</a></th>
                 <td>&nbsp;|&nbsp;</td>
-                <th><a href="./enter_new_book">[ 登録 ]</a></th>
+                <th><a href="./enterNewBook">[ 登録 ]</a></th>
                 <td>&nbsp;|&nbsp;</td>
                 <th>[ 編集 ]</th>
             </tr>
@@ -47,7 +47,7 @@
             <tr>
                 <td>
                     <img id="imgBook" src="{{ b.image_url }}" />
-                    <a href="./enter_new_book?isbn={{ b.isbn }}">{{ b.title }}</a>
+                    <a href="./enterNewBook?isbn={{ b.isbn }}">{{ b.title }}</a>
                 </td>
                 <td>
                     {% for a in b.authors %}
