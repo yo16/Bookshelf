@@ -19,12 +19,18 @@ import v_regist_book
 import v_maintenance
 import v_csv_output
 import v_csv_input
+import v_bookflatlist
 
 
 @app.route('/')
 def index():
     """Return Books list."""
     return v_booklist.main()
+
+@app.route('/flatList')
+def flat_list():
+    """Flat List"""
+    return v_bookflatlist.main()
 
 @app.route('/enterNewBook', methods=['GET'])
 def regist():

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-""" booklist
+""" book flat list
 List all books
 
-2018/11/10 y.ikeda
+2018/12/15 y.ikeda
 """
 
 from flask import Flask, render_template, request
@@ -15,6 +15,7 @@ NUM_OF_LIST = 10
 
 
 def main():
+    print('aabbb')
     # 表示するページと、開始要素を決める
     cur_page = 0
     if 'page' in request.args:
@@ -54,10 +55,10 @@ def main():
     #print(page_info)
 
     return render_template(
-        'booklist.html',
+        'flatBookList.html',
         books=bs,
         page=page_info,
         search_str=input_search_str,
-        base_page=''
+        base_page='flatList'
     )
 
