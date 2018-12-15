@@ -8,6 +8,9 @@
         <link rel="stylesheet" href="/static/css/books.css">
         <link rel="stylesheet" href="/static/css/flatBookList.css">
         <script src="/static/js/jquery-3.3.1.min.js"></script>
+        <!-- link rel="stylesheet" href="/static/js/masonry_files/normalize.css" -->
+        <link rel="stylesheet" href="/static/js/masonry_files/style.css">
+        <script src="/static/js/masonry_files/minimasonry.js"></script>
         <script type="text/javascript" src="/static/js/flatBookList.js"></script>
     </head>
 
@@ -37,7 +40,16 @@
             </tr>
         </table>
 
-        平置き
+        <div class="masonry">
+            {# {% for _ in range(10) %} #}
+            {% for b in books %}
+            <div class="item">
+                <img src="{{ b['image_url'] }}" /><br />
+                {{ b['title'] }}
+            </div>
+            {% endfor %}
+            {# {% endfor %} #}
+        </div>
 
     </body>
 </html>

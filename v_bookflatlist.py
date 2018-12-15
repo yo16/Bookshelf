@@ -11,11 +11,10 @@ import re
 from models import get_books
 
 # １ページの表示件数
-NUM_OF_LIST = 10
+NUM_OF_LIST = 40
 
 
 def main():
-    print('aabbb')
     # 表示するページと、開始要素を決める
     cur_page = 0
     if 'page' in request.args:
@@ -53,6 +52,7 @@ def main():
         'last': last_page
     }
     #print(page_info)
+    #print(bs)
 
     return render_template(
         'flatBookList.html',
