@@ -44,7 +44,7 @@
             {# % for _ in range(10) % #}
             {% for b in books %}
             <div class="item">
-                <img src="{{ b['image_url'] }}" /><br />
+                    <a href="./enterNewBook?isbn={{ b.isbn }}"><img src="{{ b['image_url'] }}" /></a><br />
                 <a href="./enterNewBook?isbn={{ b.isbn }}" class="book_title">{{ b['title'] }}</a>
             </div>
             {% endfor %}
