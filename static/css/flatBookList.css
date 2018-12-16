@@ -3,3 +3,14 @@ flatBookList.css
 
 平置きのリスト表示
 */
+
+.tblPage{
+    width: 100%;
+    font-size: 0.8rem;
+}
+.book_title{
+    font-size: 0.8rem;
+}
+.item{
+    height: 230px;
+}

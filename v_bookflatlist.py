@@ -36,6 +36,12 @@ def main():
         num_per_page=NUM_OF_LIST
     )
 
+    # 表示用に諸々を整形
+    for b in bs:
+        title_len = 8
+        if len(b['title'])>title_len:
+            b['title'] = b['title'][:title_len] + '...'
+
     # 前のページ、次のページ番号を決める
     prev_page = -1
     if 0 < cur_page:

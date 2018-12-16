@@ -7,6 +7,7 @@ This source is used in "flat_book_list.html".
 $(document).ready(function(){
     var masonry = new MiniMasonry({
         container: '.masonry',
-        baseWidth: 150
+        baseWidth: 150,
+        gutter: 20
     });
 });
