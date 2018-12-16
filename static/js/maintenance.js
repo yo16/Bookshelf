@@ -7,8 +7,12 @@ $(document).ready(function(){
         doOutputCsv();
     });
 
-    $("#btnInputCsv").click(function(){
-        doInputCsv();
+    $("#btnInputCsv_book").click(function(){
+        doInputCsv('book');
+    });
+
+    $("#btnInputCsv_pub").click(function(){
+        doInputCsv('pub');
     });
 });
 
@@ -16,24 +20,27 @@ function doOutputCsv(){
     $("#frmOutputCsv").submit();
 }
 
-function doInputCsv(){
-    var filePath = $("#fileCsv").val();
+function doInputCsv(model_name){
+    var filePath = $("#fileCsv_"+model_name).val();
     if (filePath.length==0){
-        alert('ファイルを選択してください。')
+        // 未入力
+        alert('ファイルを選択してください。');
         return;
     }
     var dotPos = filePath.lastIndexOf(".");
     if (dotPos<0){
-        alert('CSVファイルを選択してください。')
-        $("#fileCsv").val("");
+        // .がない
+        alert('CSVファイルを選択してください。');
+        $("#fileCsv_"+model_name).val("");
         return;
     }
     var ext = filePath.substr(dotPos);
     if (ext != '.csv'){
-        alert('CSVファイルを選択してください。')
-        $("#fileCsv").val("");
+        // csvではない
+        alert('CSVファイルを選択してください。');
+        $("#fileCsv_"+model_name).val("");
         return;
     }
     // submit
-    $("#frmInputCsv").submit();
+    $("#frmInputCsv_"+model_name).submit();
 }

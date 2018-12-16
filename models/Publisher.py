@@ -70,7 +70,21 @@ def regist_publisher(publisher_info):
     Returns:
         (int): 登録されたBookのkey_id
     """
-    pub_key = Publisher(**publisher_info).put()
+    # PublisherにPubCodeを問い合わせて、無かったら登録
+    p = Publisher.query(
+            Publisher.pub_code==publisher_info['pub_code']
+        ).get()
+    pub_key = 0
+    if p is None:
+        # 登録
+        pub_key = Publisher(**publisher_info).put()
+    else:
+        # あったら更新
+        p.pub_name = publisher_info['pub_name']
+        p.put()
+        # 更新したキー
+        pub_key = p.key
+    
     return pub_key.integer_id()
 
 
