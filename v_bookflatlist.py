@@ -38,7 +38,7 @@ def main():
 
     # 表示用に諸々を整形
     for b in bs:
-        title_len = 12
+        title_len = 11
         if len(b['title'])>title_len:
             b['title'] = b['title'][:title_len] + '...'
 

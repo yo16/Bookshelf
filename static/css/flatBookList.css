@@ -4,13 +4,37 @@ flatBookList.css
 平置きのリスト表示
 */
 
+/* page nation */
 .tblPage{
     width: 100%;
     font-size: 0.8rem;
 }
+
+/* 検索 */
+#txtSearch {
+    padding-left: 30px;
+    width: 200px;
+}
+#frmSearch{
+    position: relative;
+}
+#txtSearch::placeholder {
+    color: #ccc;
+}
+#svgGlass {
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    fill: currentColor;
+    color: #ccc;
+}
+
+/* item */
 .book_title{
     font-size: 0.8rem;
 }
 .item{
-    height: 230px;
+    height: 220px;
+    background-color: #fefefe;
 }
+
