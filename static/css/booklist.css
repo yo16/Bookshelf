@@ -4,7 +4,7 @@ booklist.css
 一覧
 */
 
-#imgBook {
+.imgBook {
     width: 64px;
     height: 91px;
 }
