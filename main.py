@@ -20,6 +20,7 @@ import v_maintenance
 import v_csv_output
 import v_csv_input
 import v_bookflatlist
+import v_ping
 
 
 @app.route('/')
@@ -65,6 +66,11 @@ def output_csv():
 def input_csv():
     """Input CSV"""
     return v_csv_input.main()
+
+@app.route('/ping')
+def ping():
+    """Ping Page"""
+    return v_ping.main()
 
 
 @app.errorhandler(404)
