@@ -22,31 +22,41 @@
             </tr>
         </table>
         <h1>Maintenance</h1>
+
         <h3>CSV出力</h3>
+        <div class="divParagraph">
         <form name="frmOutputCsv" id="frmOutputCsv" action="./outputCsv">
             <input type="button" id="btnOutputCsv" value="CSV出力" />
         </form>
-        <br />
+        </div>
+
         <h3>CSV入力</h3>
-        Book形式: <code>"title","publisher","authors","comment","tags","isbn","image_url"</code><br />
-        １行目はヘッダ
-        <form
-            name="frmInputCsv_book" id="frmInputCsv_book"
-            action="./inputCsv" method="POST" enctype="multipart/form-data"
-        >
-            <input type="file" id="fileCsv_book" name="csv_file" />
-            <input type="button" id="btnInputCsv_book" value="Book.CSV入力" />
-            <input type="hidden" name="file_type" value="Book" />
-        </form><br />
-        Publisher形式: <code>"publisher_code","publisher_name"</code><br />
-        １行目はヘッダ
-        <form
-            name="frmInputCsv_pub" id="frmInputCsv_pub"
-            action="./inputCsv" method="POST" enctype="multipart/form-data"
-        >
-            <input type="file" id="fileCsv_pub" name="csv_file" />
-            <input type="button" id="btnInputCsv_pub" value="Publisher.CSV入力" />
-            <input type="hidden" name="file_type" value="Publisher" />
-        </form>
+        <div class="divParagraph">
+            Book形式: <code>"title","publisher","authors","comment","tags","isbn","image_url"</code><br />
+            １行目はヘッダ
+            <form
+                name="frmInputCsv_book" id="frmInputCsv_book"
+                action="./inputCsv" method="POST" enctype="multipart/form-data"
+            >
+                <input type="file" id="fileCsv_book" name="csv_file" />
+                <input type="button" id="btnInputCsv_book" value="Book.CSV入力" />
+                <input type="hidden" name="file_type" value="Book" />
+            </form><br />
+            Publisher形式: <code>"publisher_code","publisher_name"</code><br />
+            １行目はヘッダ
+            <form
+                name="frmInputCsv_pub" id="frmInputCsv_pub"
+                action="./inputCsv" method="POST" enctype="multipart/form-data"
+            >
+                <input type="file" id="fileCsv_pub" name="csv_file" />
+                <input type="button" id="btnInputCsv_pub" value="Publisher.CSV入力" />
+                <input type="hidden" name="file_type" value="Publisher" />
+            </form>
+        </div>
+
+        <h3>Publisherメンテナンス</h3>
+        <div class="divParagraph">
+            <a href="maintePub">Publisherメンテナンス</a>
+        </div>
     </body>
 </html>

@@ -13,13 +13,14 @@ import sys
 #print(os.getcwd())
 
 import v_booklist
+import v_bookflatlist
 import v_enter_new_book
 import v_get_book_with_isbn
 import v_regist_book
 import v_maintenance
 import v_csv_output
 import v_csv_input
-import v_bookflatlist
+import v_mainte_pub
 import v_ping
 
 
@@ -66,6 +67,11 @@ def output_csv():
 def input_csv():
     """Input CSV"""
     return v_csv_input.main()
+
+@app.route('/maintePub')
+def mainte_pub():
+    """Maitenance Publisher"""
+    return v_mainte_pub.main()
 
 @app.route('/ping')
 def ping():

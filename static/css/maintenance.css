@@ -13,3 +13,10 @@ code {
     white-space: nowrap;
     border-radius: 3px;
 }
+
+h3{
+    padding-top: 20px;
+}
+.divParagraph {
+    padding-left: 30px;
+}
