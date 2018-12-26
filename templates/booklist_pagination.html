@@ -1,11 +1,13 @@
 {#
     booklist.html内で使用するページネーション
  #}
- {% set PAGE_WINDOW_SIZE = 1 %}
-
+{% set PAGE_WINDOW_SIZE = 1 %}
+{% if search_str != "" %}
+    {% set query_search_str = "&searchStr=""" + search_str + """" %}
+{% endif %}
 {# --- １つ前 --- #}
 {% if page.prev >= 0 %}
-<a href="/{{ base_page }}?page={{ page.prev }}">＜＜</a>
+<a href="/{{ base_page }}?page={{ page.prev }}{{ query_search_str }}">＜＜</a>
 {% else %}
 ＜＜
 {% endif %}
@@ -24,25 +26,25 @@
 {% for i in range(PAGE_WINDOW_SIZE) %}
     {% if 0 <= page.cur - (PAGE_WINDOW_SIZE-i) %}
         {% set target_page = page.cur - (PAGE_WINDOW_SIZE-i) %}{# 0 order #}
-        <a href="/{{ base_page }}?page={{ target_page }}">&nbsp;{{ target_page+1 }}&nbsp;</a>
+        <a href="/{{ base_page }}?page={{ target_page }}{{ query_search_str }}">&nbsp;{{ target_page+1 }}&nbsp;</a>
     {% endif %}
 {% endfor %}
 &nbsp;{{ page.cur+1 }}&nbsp;
 {% for i in range(PAGE_WINDOW_SIZE) %}
     {% if page.cur + i + 1 <= page.last %}
         {% set target_page = page.cur + i + 1 %}{# 0 order #}
-        <a href="/{{ base_page }}?page={{ target_page }}">&nbsp;{{ target_page+1 }}&nbsp;</a>
+        <a href="/{{ base_page }}?page={{ target_page }}{{ query_search_str }}">&nbsp;{{ target_page+1 }}&nbsp;</a>
     {% endif %}
 {% endfor %}
 {% if page.cur + PAGE_WINDOW_SIZE < page.last %}
 {% if page.cur + PAGE_WINDOW_SIZE + 1 < page.last %}
 &hellip;
 {% endif %}
-<a href="/{{ base_page }}?page={{ page.last }}">&nbsp;{{ page.last+1 }}&nbsp;</a>
+<a href="/{{ base_page }}?page={{ page.last }}{{ query_search_str }}">&nbsp;{{ page.last+1 }}&nbsp;</a>
 {% endif %}
 {# --- １つ後 --- #}
 {% if 0 < page.next %}
-<a href="/{{ base_page }}?page={{ page.next }}">
+<a href="/{{ base_page }}?page={{ page.next }}{{ query_search_str }}">
     ＞＞
 </a>
 {% else %}
