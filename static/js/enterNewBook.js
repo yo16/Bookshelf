@@ -303,11 +303,20 @@ function validate_isbn_code(isbn){
  */
 function removeBook(){
     // 確認
+    /*
     var res = confirm("この本の情報を削除してもいいですか？\n["+$("#title").val()+"]");
     if (!res){
         console.log("rejected.")
         return;
     }
+    */
+   var title = $("#title").val();
+   var isbn = $("#isbn").val();
+   var res = prompt("この本「" + title + "」を削除してもいいですか？\n削除する場合は、確認のためにこの本のISBN「" + isbn + "」を入力してください。");
+   if( res != isbn ){
+       alert("削除はキャンセルされました。");
+       return;
+   }
 
     // 削除処理
     $("#hdnDelete").val("1");
