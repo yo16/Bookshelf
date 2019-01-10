@@ -57,11 +57,7 @@
                 <td>{{ b.publisher }}</td>
                 <!-- td>{{ b.isbn }}</td -->
                 <td>{{ b.comment }}</td>
-                <td>
-                    {% for t in b.tags %}
-                        {{ t }}<br />
-                    {% endfor %}
-                </td>
+                <td>{% for t in b.tags %}<a href="/?searchStr={{ t }}">{{ t }}</a><br />{% endfor %}</td>
             </tr>
             {% endfor %}
         </table>
